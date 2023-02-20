@@ -9,13 +9,11 @@ public class playerControler : MonoBehaviour
     private Rigidbody rb;
     private Vector2 controls;
     private Transform gunl;
-    private Transform gunr;
     private bool fireButtonDown = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         gunl = transform.Find("gunl");
-        gunr = transform.Find("gunr");
     }
 
     // Update is called once per frame
@@ -27,20 +25,20 @@ public class playerControler : MonoBehaviour
         controls = new Vector2(h, v);
         if (Mathf.Abs(transform.position.x) > 20)
         {
-            Vector3 newPosition = new Vector3(transform.position.x * -1 , 0 ,transform.position.z);
+            Vector3 newPosition = new Vector3(transform.position.x * -1, 0, transform.position.z);
 
             transform.position = newPosition;
 
         }
         if (Mathf.Abs(transform.position.z) > 11)
         {
-            Vector3 newPosition = new Vector3(transform.position.x , 0, transform.position.z * -1);
+            Vector3 newPosition = new Vector3(transform.position.x, 0, transform.position.z * -1);
 
             transform.position = newPosition;
 
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             fireButtonDown = true;
         }
@@ -54,15 +52,22 @@ public class playerControler : MonoBehaviour
         {
             GameObject bullet1 = Instantiate(bulletPrefab, gunl.position, Quaternion.identity);
             bullet1.transform.parent = null;
-            bullet1.GetComponent<Rigidbody>().AddForce(bullet1.transform.forward, 
+            bullet1.GetComponent<Rigidbody>().AddForce(transform.forward * 20,
                 ForceMode.VelocityChange);
+            Destroy(bullet1, 5);
             fireButtonDown = false;
+        }
+    }
 
-            GameObject bullet2 = Instantiate(bulletPrefab, gunr.position, Quaternion.identity);
-            bullet1.transform.parent = null;
-            bullet1.GetComponent<Rigidbody>().AddForce(bullet1.transform.forward,
-                ForceMode.VelocityChange);
-            fireButtonDown = false;
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other = collision.gameObject) {
+            Time.timeScale = 0;
+            GameObject gameoverscreen = GameObject.Find("Canvas").transform.Find("gameOverScreen").gameObject;
+            gameoverscreen.SetActive(true);
+            Destroy(other);
+            Destroy(gameObject);
         }
     }
 }
