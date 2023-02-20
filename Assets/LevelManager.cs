@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     CameraScript cs;
     float verticalDistance, horizontalDistance;
-    float spawnTimer = 0;
+    float spawnTimer = 1;
     public float spawnInterval = 5;
     public GameObject asteroidPrefab;
 
@@ -23,44 +23,45 @@ public class LevelManager : MonoBehaviour
         if (spawnTimer > spawnInterval)
         {
             Vector3 spawnPosition = getRandomSpawnPosition();
-            GameObject asteoride = Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
+            GameObject asteorid = Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
 
-            spawnTimer = 0;
+            spawnTimer = 1;
         }
-    }
-    Vector3 getRandomSpawnPosition()
-    {
-        verticalDistance = 0.55f * cs.gameHeight;
-        horizontalDistance = 0.55f * cs.gameWidth;
-        int randomSpawnLine = Random.Range(1, 5);
-        Vector3 randomSpawnLocation = Vector3.zero;
-        switch (randomSpawnLine)
+
+        Vector3 getRandomSpawnPosition()
         {
-            case 1:
-                
-                randomSpawnLocation = new Vector3(Random.Range(-horizontalDistance, horizontalDistance),
-                                                                0,
-                                                                verticalDistance);
-                break;
-            case 2:
-                
-                randomSpawnLocation = new Vector3(horizontalDistance,
-                                                  0,
-                                                  Random.Range(-verticalDistance, verticalDistance));
-                break;
-            case 3:
-                
-                randomSpawnLocation = new Vector3(Random.Range(-horizontalDistance, horizontalDistance),
-                                                                0,
-                                                                -verticalDistance);
-                break;
-            case 4:
-                
-                randomSpawnLocation = new Vector3(-horizontalDistance,
-                                                  0,
-                                                  Random.Range(-verticalDistance, verticalDistance));
-                break;
+            verticalDistance = 0.55f * cs.gameHeight;
+            horizontalDistance = 0.55f * cs.gameWidth;
+            int randomSpawnLine = Random.Range(1, 5);
+            Vector3 randomSpawnLocation = Vector3.zero;
+            switch (randomSpawnLine)
+            {
+                case 1:
+
+                    randomSpawnLocation = new Vector3(Random.Range(-horizontalDistance, horizontalDistance),
+                                                                    0,
+                                                                    verticalDistance);
+                    break;
+                case 2:
+
+                    randomSpawnLocation = new Vector3(horizontalDistance,
+                                                      0,
+                                                      Random.Range(-verticalDistance, verticalDistance));
+                    break;
+                case 3:
+
+                    randomSpawnLocation = new Vector3(Random.Range(-horizontalDistance, horizontalDistance),
+                                                                    0,
+                                                                    -verticalDistance);
+                    break;
+                case 4:
+
+                    randomSpawnLocation = new Vector3(-horizontalDistance,
+                                                      0,
+                                                      Random.Range(-verticalDistance, verticalDistance));
+                    break;
+            }
+            return randomSpawnLocation;
         }
-        return randomSpawnLocation;
     }
 }

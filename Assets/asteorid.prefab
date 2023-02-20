@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2270961434807356202}
   - component: {fileID: 272051919568908986}
   m_Layer: 0
-  m_Name: asteoride
-  m_TagString: Untagged
+  m_Name: asteorid
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

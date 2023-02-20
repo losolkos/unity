@@ -35,4 +35,9 @@ public class GameMenager : MonoBehaviour
     {
         SceneManager.LoadScene("mainmain");
     }
+
+    public void Reset()
+    {
+        
+    }
 }
