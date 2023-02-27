@@ -1,34 +1,38 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroidscript : MonoBehaviour
 {
-    GameObject Player;
-    Rigidbody rb;
+    public float speed = 2f;
+    // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        rb = GetComponent<Rigidbody>();
-        Vector3 movementVector = Player.transform.position - transform.position;
-        movementVector = movementVector.normalized * 10;
-        rb.AddForce(movementVector, ForceMode.VelocityChange);
-        rb.AddTorque(new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90)));
-        Destroy(gameObject, 5);
+         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+
+
+      
+        Vector3 playerVector = player.position - transform.position;
+        transform.GetComponent<Rigidbody>().AddForce(playerVector.normalized * speed, ForceMode.VelocityChange);
+
+        Vector3 randomVector = new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90));
+        transform.GetComponent<Rigidbody>().AddTorque(randomVector);
     }
 
     void Update()
     {
 
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         GameObject other = collision.gameObject;
-        if (other.CompareTag("bullet")){
+        if (other.CompareTag("bullet1"))
+        {
+          
             Destroy(other);
-            Destroy(gameObject);
 
+
+            Destroy(gameObject);
         }
     }
 }
